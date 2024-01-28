@@ -19,13 +19,13 @@ def main():
     if selected_box=='view source code':
         st.code(get_file_content_as_string("app.py"))
 
-@st.cache(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def get_file_content_as_string(path):
     url = 'https://github.com/Arunfi143/Emotion_Recognition_using_Speech' + path
     response = urllib.request.urlopen(url)
     return response.read().decode("utf-8")
     
-@st.cache(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def load_model():
     model=tf.keras.models.load_model('mymodel.h5')
     
@@ -60,5 +60,5 @@ def predict(model,wav_filepath):
     print(emotions[np.argmax(predictions[0])+1])
     
     return emotions[np.argmax(predictions[0])+1]
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
